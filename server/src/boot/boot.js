@@ -26,7 +26,7 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../../../public/dist/', 'index.html'));
 });
 
-// Get the p[ort from the environment and store it in express
+// Get the port from the environment and store it in express
 const port = process.env.PORT || 80;
 app.set('port', port);
 // Create the HTTP server
