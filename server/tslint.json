@@ -1,0 +1,16 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "no-consecutive-blank-lines": [true, 1],
+    "max-line-length": [true, 120],
+    "no-conditional-assignment": false,
+    "no-duplicate-variable": true,
+    "class-name": true,
+    "no-unused-variable": true,
+    "variable-name": [true, "check-format", "allow-leading-underscore"],
+    "prefer-switch": true,
+    "quotemark": ["single"],
+    "semicolon": [true, "always"],
+    "no-console": ["debug", "log"]
+  }
+}

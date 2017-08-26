@@ -1,37 +1,37 @@
-// Get dependencies
-const express = require('express');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+// Dependencies - 3rd Party
+const bodyParser = require("body-parser");
+const errorHandler = require("errorhandler");
+const express = require("express");
+const expressValidator = require("express-validator");
+const logger = require("morgan");
+const path = require("path");
+// Dependencies - Internal
+const test = require('../api/test.endpoint');
+// Express configuration
 const app = express();
-const http = require('http');
-const bodyParser = require('body-parser');
-const path = require('path');
-const morgan = require('morgan');
-// Setup the logger
-const logger = morgan('combined');
-app.use(logger);
-// Get the API route
-const api_router = express.Router();
-// Parsers for POST data
+const apiRouter = express.Router();
+app.set("port", process.env.PORT || 80);
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-// Point static path to the compiled angular 2 files
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 app.use(express.static(path.join(__dirname, "../../../public/dist")));
-// Set the API route
-// TODO: LINK ALL API ROUTES HERE, BEFORE REDIRECTING THE REST TO INDEX.HTML
-api_router.get('/', (req, res) => {
-  res.status(200).json({message: 'Welcome to the api...'});
+// API configuration
+apiRouter.get('/', function (req, res) {
+  res.status(200).json({ message: 'Welcome to the API...' });
 });
-app.use('/api', api_router);
-// Catch all other routes and return the index
+app.use('/api', apiRouter);
+// Endpoint configuration
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../../../public/dist/', 'index.html'));
 });
-
-// Get the port from the environment and store it in express
-const port = process.env.PORT || 80;
-app.set('port', port);
-// Create the HTTP server
-const server = http.createServer(app);
-// Listen on the provided port, on all network interfaces
-server.listen(port, () => {
-  console.log(`Server Started On Port ${port}...`)
+// Error Handler
+// TODO: Remove for production
+app.use(errorHandler());
+app.listen(app.get('port'), function () {
+  console.log("Server is listening on http://localhost:" + app.get('port') + " in " + app.get('env') + " mode");
+  console.log("Press CTRL-C to stop.");
 });
+module.exports = app;
