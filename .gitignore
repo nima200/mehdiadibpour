@@ -7,6 +7,8 @@
 public/dist
 /tmp
 /out-tsc
+# server
+/server/dist
 
 # dependencies
 public/node_modules
