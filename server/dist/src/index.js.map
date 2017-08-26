@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/index.js"],"names":["require"],"mappings":";;AAAAA,QAAQ,YAAR;AACAA,QAAQ,gBAAR;AACAA,QAAQ,aAAR","file":"index.js","sourcesContent":["require('babel-core');\r\nrequire('babel-polyfill');\r\nrequire('./boot/boot');\r\n\r\n"]}
